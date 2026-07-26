@@ -30,7 +30,7 @@ app.use(mongoSanitize()); // Prevent NoSQL injection
 // ──── Rate Limiter (auth routes) ────
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 20,
+  max: 1000, // Increased for scalability
   message: { success: false, message: 'Too many requests, please try again later' },
 });
 

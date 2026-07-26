@@ -47,26 +47,25 @@ ${productContext}
 Always format your responses using clean Markdown. Use bold for product names. Keep responses concise but helpful.`;
 
   try {
-    const formattedHistory = (history || []).map(msg => ({
+    const contents = (history || []).map(msg => ({
       role: msg.role === 'user' ? 'user' : 'model',
       parts: [{ text: msg.content }]
     }));
 
-    // Start a chat session
-    const chat = ai.chats.create({
-      model: 'gemini-3.6-flash',
+    // Add the user's current message
+    contents.push({
+      role: 'user',
+      parts: [{ text: message }]
+    });
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-1.5-flash',
+      contents: contents,
       config: {
         systemInstruction: systemInstruction,
         temperature: 0.7,
       }
     });
-
-    // Send the history if any
-    for (const msg of formattedHistory) {
-      await chat.sendMessage({ message: msg.parts[0].text });
-    }
-
-    const response = await chat.sendMessage({ message });
     
     res.json({
       success: true,
