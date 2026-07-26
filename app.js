@@ -39,7 +39,13 @@ app.use('/api/payments/webhook', express.raw({ type: 'application/json' }), requ
 
 // ──── Core Middleware ────
 app.use(cors({
-  origin: [process.env.CLIENT_URL, 'http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'].filter(Boolean),
+  origin: [
+    process.env.CLIENT_URL, 
+    'http://localhost:3000', 
+    'http://localhost:3001', 
+    'http://localhost:5173',
+    'https://stranddsf.vercel.app'
+  ].filter(Boolean),
   credentials: true,
 }));
 app.use(express.json({ limit: '10mb' }));
