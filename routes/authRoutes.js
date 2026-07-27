@@ -12,14 +12,14 @@ const handleOAuthCallback = (req, res) => {
   try {
     // Passport puts the authenticated user in req.user
     if (!req.user) {
-      return res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/login?error=auth_failed`);
+      return res.redirect(`${process.env.CLIENT_URL || 'https://stranddsf.vercel.app'}/login?error=auth_failed`);
     }
     const tokens = generateToken(res, req.user._id);
     const accessToken = tokens ? tokens.accessToken : '';
-    res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/?token=${accessToken}`);
+    res.redirect(`${process.env.CLIENT_URL || 'https://stranddsf.vercel.app'}/?token=${accessToken}`);
   } catch (err) {
     console.error('OAuth Callback Error:', err);
-    res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/login?error=auth_callback_crashed`);
+    res.redirect(`${process.env.CLIENT_URL || 'https://stranddsf.vercel.app'}/login?error=auth_callback_crashed`);
   }
 };
 router.post('/register', registerRules, validate, register);
