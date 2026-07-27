@@ -14,8 +14,9 @@ const handleOAuthCallback = (req, res) => {
     if (!req.user) {
       return res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/login?error=auth_failed`);
     }
-    generateToken(res, req.user._id);
-    res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/`);
+    const tokens = generateToken(res, req.user._id);
+    const accessToken = tokens ? tokens.accessToken : '';
+    res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/?token=${accessToken}`);
   } catch (err) {
     console.error('OAuth Callback Error:', err);
     res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/login?error=auth_callback_crashed`);
