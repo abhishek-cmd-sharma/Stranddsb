@@ -8,7 +8,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID || 'placeholder',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'placeholder',
-      callbackURL: process.env.GOOGLE_CALLBACK_URL || 'http://localhost:5000/api/auth/google/callback',
+      callbackURL: process.env.GOOGLE_CALLBACK_URL || '/api/auth/google/callback',
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -55,7 +55,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID || 'placeholder',
       clientSecret: process.env.FACEBOOK_APP_SECRET || 'placeholder',
-      callbackURL: process.env.FACEBOOK_CALLBACK_URL || 'http://localhost:5000/api/auth/facebook/callback',
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL || '/api/auth/facebook/callback',
       profileFields: ['id', 'displayName', 'emails'],
       proxy: true,
     },
