@@ -13,6 +13,10 @@ const session = require('express-session');
 
 const app = express();
 
+// Trust proxy is required for apps hosted on Render/Heroku to correctly resolve
+// secure URLs (HTTPS) and the actual host domain for OAuth callbacks.
+app.set('trust proxy', 1);
+
 // ──── Security Middleware ────
 app.use(helmet({ 
   crossOriginResourcePolicy: { policy: 'cross-origin' },
