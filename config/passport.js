@@ -8,7 +8,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID || 'placeholder',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'placeholder',
-      callbackURL: process.env.GOOGLE_CALLBACK_URL && process.env.GOOGLE_CALLBACK_URL !== 'http://localhost:5000/api/auth/google/callback' 
+      callbackURL: process.env.GOOGLE_CALLBACK_URL && !process.env.GOOGLE_CALLBACK_URL.includes('localhost') 
         ? process.env.GOOGLE_CALLBACK_URL 
         : 'https://strandds.techember.in/api/auth/google/callback',
       proxy: true,
@@ -57,7 +57,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID || 'placeholder',
       clientSecret: process.env.FACEBOOK_APP_SECRET || 'placeholder',
-      callbackURL: process.env.FACEBOOK_CALLBACK_URL && process.env.FACEBOOK_CALLBACK_URL !== 'http://localhost:5000/api/auth/facebook/callback' 
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL && !process.env.FACEBOOK_CALLBACK_URL.includes('localhost') 
         ? process.env.FACEBOOK_CALLBACK_URL 
         : 'https://strandds.techember.in/api/auth/facebook/callback',
       profileFields: ['id', 'displayName', 'emails'],
