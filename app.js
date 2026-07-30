@@ -8,8 +8,7 @@ const compression = require('compression');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
-const passport = require('./config/passport');
-const session = require('express-session');
+
 
 const app = express();
 
@@ -65,14 +64,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
 }
 
-app.use(session({
-  secret: process.env.JWT_SECRET || 'fallback_secret',
-  resave: false,
-  saveUninitialized: false,
-}));
 
-app.use(passport.initialize());
-app.use(passport.session());
 
 // ──── Static Files ────
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
